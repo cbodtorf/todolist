@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>What it do baby boo</title>
+    <link rel="stylesheet" href="node_modules/normalize-css/normalize.css">
+    <link rel="stylesheet" href="main.css">
+    <link href='https://fonts.googleapis.com/css?family=Amatic+SC' rel='stylesheet' type='text/css'>
+  </head>
+  <body>
+    <div class="main-container">
+      <header>
+        <h1>todos</h1>
+      </header>
+      <section class="todo-container">
+        <form class="todos" action="index.html" method="post">
+          <input type="text" name="create" placeholder="What it do baby boo?" data-id="">
+          <input type="text" name="todo" readonly="true" ondblclick="this.readOnly='';" value="sample post" data-id="">
+          <!-- sample post -->
+
+        </form>
+        <footer>
+          <span># items left</span>
+          <button type="button" name="all">All</button>
+          <button type="button" name="active">Active</button>
+          <button type="button" name="completed">Completed</button>
+          <button type="button" name="clear">Clear Complete</button>
+        </footer>
+      </section>
+      <div class="hint-box">
+        <span class='hint'>Double-click to edit a todo</span>
+      </div>
+    </div>
+
+
+
+    <script src="node_modules/jquery/dist/jquery.js" charset="utf-8"></script>
+    <script src="node_modules/underscore/underscore.js" charset="utf-8"></script>
+    <script src="app.js" charset="utf-8"></script>
+  </body>
+</html>

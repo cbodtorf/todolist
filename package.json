@@ -1,0 +1,19 @@
+{
+  "name": "todo-murph",
+  "version": "1.0.0",
+  "description": "to do list",
+  "main": "app.js",
+  "dependencies": {
+    "jquery": "^2.2.4",
+    "underscore": "^1.8.3",
+    "normalize-css": "2.3.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "sass": "node-sass -w styles.scss main.css",
+    "start": "serve & npm run sass"
+  },
+  "author": "Caleb Bodtorf",
+  "license": "ISC"
+}

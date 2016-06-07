@@ -1,0 +1,51 @@
+.main-container {
+  background-color: #F5F5F5;
+  font-family: 'Amatic SC', cursive;
+  width: 83%;
+  margin: 100px auto;
+  text-align: center; }
+  .main-container h1 {
+    font-size: 6em;
+    color: #EAD7D7;
+    font-weight: 100; }
+  .main-container .hint {
+    font-size: .7em;
+    margin-top: 100px;
+    margin-bottom: 10px; }
+  .main-container .hint-box {
+    margin-top: 60px;
+    padding-bottom: 10px; }
+
+.todo-container {
+  background-color: white;
+  box-shadow: 0 0 2px 2px rgba(150, 150, 150, 0.3);
+  width: 80%;
+  margin: 0 auto; }
+  .todo-container footer {
+    font-size: 1.2em;
+    padding: 8px; }
+    .todo-container footer span {
+      float: left; }
+    .todo-container footer button[name=clear] {
+      float: right; }
+  .todo-container input {
+    width: 87%;
+    margin-left: 5%;
+    font-size: 3em;
+    border: none;
+    border-bottom: 1px solid rgba(150, 150, 150, 0.3); }
+    .todo-container input:focus {
+      border: none;
+      box-shadow: inset 0 -2px 0 0 rgba(150, 150, 150, 0.3);
+      outline: none;
+      outline-offset: 2px; }
+  .todo-container button {
+    background-color: transparent;
+    border: none;
+    border-radius: 3px; }
+    .todo-container button:hover {
+      font-weight: bold; }
+    .todo-container button:focus {
+      border: 1px solid #EAD7D7;
+      outline: none;
+      outline-offset: 2px; }
