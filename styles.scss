@@ -26,6 +26,15 @@ body {
     padding-bottom: 10px;
   }
 }
+.check-circle{
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  margin: 5px;
+  border: .5px solid green;
+  border-radius: 100%;
+  color: green;
+}
 
 
 //TODOCONTAINER
@@ -46,7 +55,7 @@ body {
   }
   input {
     width: 87%;
-    margin-left: 5%;
+    margin-left: 2%;
     font-size: 3em;
     border: none;
     border-bottom: 1px solid rgba(150,150,150,0.3);
