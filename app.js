@@ -13,7 +13,12 @@ var app = {
     app.read();
   },
   events: function(){
+    // $( ".todos" ).focus(function() {
+    //   $(this).children().prop('readOnly', true);
+    //
+    //   });
     //maybe bind the keypress under a click event that toggles class.
+
     $('#create').keypress(function(e){
       //enter pressed ?
       if(e.which == 10 || e.which == 13) {
@@ -24,24 +29,24 @@ var app = {
             $(this).val("");
             }
     })
-    // $('form').keypress("#todo", function(e){
-    //   //enter pressed ?
-    //   var poop = $('this').find('input').val();
-    //   console.log("Im hungryfor .", poop);
-    //   if ( $('input').is('[readonly]') ) {
-    //
-    //    }
-    //   var $that = $(this).find("input[name=todo]").val();
-    //   // console.log($that);
-    //   if(e.which == 10 || e.which == 13) {
-    //       // var $that = $(this).find("input");
-    //       var newTodo = $that.val();
-    //       var todoID = $that.data("id");
-    //       console.log("the super enter button works on...", $that);
-    //       app.update({value: newTodo}, todoID);
-    //       $that.prop('readOnly', true);
-    //         }
-    // })
+
+    $('form').keypress("input[type=text]", function(e){
+      //enter pressed ?
+      if(e.which == 10 || e.which == 13) {
+          var $thisCheck = $(":input:not([readonly])");
+          var thisEl = $thisCheck.filter(function(i,e,a){
+            return $(e).hasClass('tofind');
+            }).each(function(i,e,a){
+              var obj = {
+                id: $(e).data('id'),
+                value: $(e).val()
+              }
+              console.log(obj);
+              app.update({value: obj.value, _id: obj.id});
+              })
+            }
+    })
+
     $('#clear').on('click', function(event) {
         event.preventDefault();
         console.log(this);
@@ -89,9 +94,9 @@ var app = {
       }
     })
   },
-  update: function(todos, id){
+  update: function(todos){
     $.ajax({
-      url: app.url + "/" + id,
+      url: app.url + "/" + todos._id,
       data: todos,
       method:"PUT",
       success: function(data){
@@ -122,7 +127,7 @@ var app = {
     })
   },
   todoGenerator: function (data){
-    var tmpl = _.template(`<div class="check-to" data-id="<%= _id %>"><input type="checkbox" id="<%= _id %>"><input type="text" name="todo" readonly="true" ondblclick="this.readOnly='';" value="<%= value %>" data-id="<%= _id %>"></div>`);
+    var tmpl = _.template(`<div class="check-to" data-id="<%= _id %>"><input type="checkbox" id="<%= _id %>"><input class="tofind" type="text" name="todo" readonly="true" ondblclick="this.readOnly='';" value="<%= value %>" data-id="<%= _id %>"></div>`);
     return tmpl(data)
   }
 }
