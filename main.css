@@ -17,13 +17,27 @@
     padding-bottom: 10px; }
 
 .check-circle {
+  padding-top: 2px;
+  vertical-align: text-bottom;
   display: inline-block;
   width: 30px;
   height: 30px;
-  margin: 5px;
-  border: .5px solid green;
+  padding: 9px 2px 0 3px;
+  margin: -2px;
+  border: .5px solid #62C3B1;
   border-radius: 100%;
-  color: green; }
+  color: #62C3B1; }
+
+.arrow {
+  font-size: 4em;
+  padding-top: 2px;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  padding: 9px 2px 0 3px;
+  margin: -2px;
+  border-radius: 100%;
+  color: rgba(150, 150, 150, 0.3); }
 
 .todo-container {
   background-color: white;

@@ -13,15 +13,16 @@
         <h1>todos</h1>
       </header>
       <section class="todo-container">
+        <div class="arrow">⌄</div>
         <input id="create" type="text" name="create" placeholder="What it do baby boo?" data-id="">
         <form class="todos" action="index.html" method="post">
           <!-- sample post -->
         </form>
         <footer>
-          <span># items left</span>
-          <button type="button" name="all">All</button>
-          <button type="button" name="active">Active</button>
-          <button type="button" name="completed">Completed</button>
+          <span class="numLeft"># items left</span>
+          <button class="all" type="button" name="all">All</button>
+          <button class="active" type="button" name="active">Active</button>
+          <button class="completed" type="button" name="completed">Completed</button>
           <button id="clear" type="button" name="clear">Clear Complete</button>
         </footer>
       </section>

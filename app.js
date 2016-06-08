@@ -55,7 +55,7 @@ $("form").on('click', ".check-circle", function(){
    console.log(cirId);
    if ($text === " ") {
       console.log(this,"on");
-      $this.text('√');
+      $this.text('✓');
       var $check = $this.text();
       console.log($check);
       app.update({check: $check, _id: cirId })
@@ -75,13 +75,64 @@ $("form").on('click', ".check-circle", function(){
         console.log("array bay",checkArr);
         var checks = checkArr.filter(function(e,i,a){
           var $checked = $(e).children();
-          return $checked.text() === "√" ;
+          return $checked.text() === "✓" ;
         }).forEach(function(e,i,a){
           var todoId = $(e).data('id');
           app.delete(todoId);
         })
     })
 
+    // ALL
+    $('.all').on('click', function(event){
+      event.preventDefault();
+      app.read();
+    })
+
+    // ACTIVE
+    $('.active').on('click', function(event){
+      event.preventDefault();
+      $.ajax({
+        url: app.url,
+        method: "GET",
+        success: function(data) {
+          $("form").html("");
+          console.log(data.check);
+          data.filter(function(e,i,a){
+            return e.check === " ";
+          }).forEach(function(e,i,a){
+            var todoStr = app.todoGenerator(e);
+            $('.todos').append(todoStr);
+            app.todos.push(e);
+          })
+        },
+        error: function(){
+          console.error("dang son!");
+        }
+      })
+    })
+
+    // COMPLETED
+    $('.completed').on('click', function(event){
+      event.preventDefault();
+      $.ajax({
+        url: app.url,
+        method: "GET",
+        success: function(data) {
+          $("form").html("");
+          console.log(data.check);
+          data.filter(function(e,i,a){
+            return e.check === "✓";
+          }).forEach(function(e,i,a){
+            var todoStr = app.todoGenerator(e);
+            $('.todos').append(todoStr);
+            app.todos.push(e);
+          })
+        },
+        error: function(){
+          console.error("dang son!");
+        }
+      })
+    })
   },
   create: function(todos){
     $.ajax({
@@ -106,6 +157,8 @@ $("form").on('click', ".check-circle", function(){
       success: function(data){
         console.log("hey hey get", data);
         $("form").html("");
+        var num = data.length;
+        $('.numLeft').text(num + " items left")
         data.forEach(function(e,i,a){
           var todoStr = app.todoGenerator(e);
           $('.todos').append(todoStr);
@@ -157,18 +210,3 @@ $("form").on('click', ".check-circle", function(){
     return tmpl(data)
   }
 }
-// <input type="checkbox" id="<%= _id %>">
-
-//previous delete w/ classic checkbox
-
-// $('#clear').on('click', function(event) {
-//     event.preventDefault();
-//     console.log(this);
-//     var checkArr = $('.todos').children().toArray();
-//     var checks = checkArr.filter(function(e,i,a){
-//       return $(e).children().prop("checked") === true
-//     }).forEach(function(e,i,a){
-//       var todoId = $(e).data('id');
-//       app.delete(todoId);
-//     })
-// })
