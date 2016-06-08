@@ -10,19 +10,52 @@ var app = {
     app.events();
   },
   styles: function(){
-
+    app.read();
   },
   events: function(){
-    $('input').keypress(function(e){
+    //maybe bind the keypress under a click event that toggles class.
+    $('#create').keypress(function(e){
       //enter pressed ?
       if(e.which == 10 || e.which == 13) {
           console.log("the enter button works on...", this);
-          console.log($(this).val());
+          var newTodo = $(this).val();
+          console.log(newTodo);
+            app.create({value: newTodo});
+            $(this).val("");
             }
+    })
+    // $('form').keypress("#todo", function(e){
+    //   //enter pressed ?
+    //   var poop = $('this').find('input').val();
+    //   console.log("Im hungryfor .", poop);
+    //   if ( $('input').is('[readonly]') ) {
+    //
+    //    }
+    //   var $that = $(this).find("input[name=todo]").val();
+    //   // console.log($that);
+    //   if(e.which == 10 || e.which == 13) {
+    //       // var $that = $(this).find("input");
+    //       var newTodo = $that.val();
+    //       var todoID = $that.data("id");
+    //       console.log("the super enter button works on...", $that);
+    //       app.update({value: newTodo}, todoID);
+    //       $that.prop('readOnly', true);
+    //         }
+    // })
+    $('#clear').on('click', function(event) {
+        event.preventDefault();
+        console.log(this);
+        var checkArr = $('.todos').children().toArray();
+        var checks = checkArr.filter(function(e,i,a){
+          return $(e).children().prop("checked") === true
+        }).forEach(function(e,i,a){
+          var todoId = $(e).data('id');
+          app.delete(todoId);
+        })
     })
 
   },
-  create: function(){
+  create: function(todos){
     $.ajax({
       url: app.url,
       data: todos,
@@ -31,6 +64,7 @@ var app = {
         console.log("hey hey create", data);
         var todoStr = app.todoGenerator(data);
         $('.todos').append(todoStr);
+        app.read();
       },
       error: function(){
         console.error("dang son!")
@@ -41,32 +75,45 @@ var app = {
     $.ajax({
       url: app.url,
       method:"GET",
-      success: function(){
-
+      success: function(data){
+        console.log("hey hey get", data);
+        $("form").html("");
+        data.forEach(function(e,i,a){
+          var todoStr = app.todoGenerator(e);
+          $('.todos').append(todoStr);
+          app.todos.push(e);
+        })
       },
       error: function(){
         console.error("dang son!")
       }
     })
   },
-  update: function(){
+  update: function(todos, id){
     $.ajax({
-      url: app.url,
+      url: app.url + "/" + id,
       data: todos,
       method:"PUT",
-      success: function(){
+      success: function(data){
+        console.log("what the heck", data);
+        var todoStr = app.todoGenerator(data);
+        app.read();
 
       },
-      error: function(){
+      error: function(data){
         console.error("dang son!")
       }
     })
   },
-  delete: function(){
+  delete: function(todoId){
+    // find blog to delete from our blog data;
+    var deleteUrl = app.url + "/" + todoId;
     $.ajax({
-      url: app.url,
+      url: deleteUrl,
       method:"DELETE",
-      success: function(){
+      success: function(data){
+        console.log("WE DELETED SOMETHING", data);
+        app.read();
 
       },
       error: function(){
@@ -75,7 +122,7 @@ var app = {
     })
   },
   todoGenerator: function (data){
-    var tmpl = _.template(`<input type="text" name="todo" readonly="true" ondblclick="this.readOnly='';" value="<%= value %>" data-id="">`);
-    return tmpl({value: data})
+    var tmpl = _.template(`<div class="check-to" data-id="<%= _id %>"><input type="checkbox" id="<%= _id %>"><input type="text" name="todo" readonly="true" ondblclick="this.readOnly='';" value="<%= value %>" data-id="<%= _id %>"></div>`);
+    return tmpl(data)
   }
 }

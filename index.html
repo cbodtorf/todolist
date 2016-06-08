@@ -13,18 +13,16 @@
         <h1>todos</h1>
       </header>
       <section class="todo-container">
+        <input id="create" type="text" name="create" placeholder="What it do baby boo?" data-id="">
         <form class="todos" action="index.html" method="post">
-          <input type="text" name="create" placeholder="What it do baby boo?" data-id="">
-          <input type="text" name="todo" readonly="true" ondblclick="this.readOnly='';" value="sample post" data-id="">
           <!-- sample post -->
-
         </form>
         <footer>
           <span># items left</span>
           <button type="button" name="all">All</button>
           <button type="button" name="active">Active</button>
           <button type="button" name="completed">Completed</button>
-          <button type="button" name="clear">Clear Complete</button>
+          <button id="clear" type="button" name="clear">Clear Complete</button>
         </footer>
       </section>
       <div class="hint-box">
